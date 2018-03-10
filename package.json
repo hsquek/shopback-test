@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hsquek/shopback-test/issues"
   },
-  "homepage": "https://github.com/hsquek/shopback-test#readme"
+  "homepage": "https://github.com/hsquek/shopback-test#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  }
 }
