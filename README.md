@@ -1,6 +1,6 @@
-## SEO Checker
+# SEO Checker
 
-###### Find out if you're flouting any SEO rules
+#### Find out if you're flouting any SEO rules
 
 ### Initialisation and Usage
 
@@ -16,7 +16,7 @@ checker.inspectTitle().inspectH1().report()
 ```
 
 ### API
-
+__The following methods adhere to certain pre-defined SEO rules:__
 ##### .inspectTitle()
 Logs an error if there is no `<title>` tag in the `<head>`.
 
@@ -70,6 +70,8 @@ meta
   -> <meta name="keywords"... > not found in <head>
 ```
 
+##### __The next few methods allow you greater flexibility in defining your own rules.__
+
 ##### ._exists(selector)
 Logs an error if selector is not found.
 ```
@@ -94,3 +96,6 @@ Logs an error if selector does not have a specific attribute declared or has emp
 checker._hasMissingAttribute('div', 'class')
 // { div: '<div> without class attribute or has empty class attribute: 1' }
 ```
+
+### Acknowledgements
+[cheerio](https://github.com/cheeriojs/cheerio)
