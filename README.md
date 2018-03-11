@@ -11,11 +11,13 @@ Pass in the path to your HTML file to initialise the checker.
 const Checker = require('Checker')
 var checker = new Checker('./path/to/file.html')
 
-checker.inspectTitle().inspectH1().report()
+checker.inspectTitle().inspectH1()._hasMissingAttribute('meta', 'content').report()
 //  head title
 //    -> <title> not found
 //  h1
 //    -> There should not be more than 1 <h1> tag(s). Count: 2
+//  meta
+//    -> <meta> without content attribute or has empty content attribute: 1
 ```
 
 ### API

@@ -111,18 +111,27 @@ describe('.inspectAnchors', function () {
 describe('method chaining', function () {
   it('Should show an error if methods cannot be chained', function (done) {
     var checker = new Checker('./test/scenarios/fail-all.html')
-    checker.inspectImages().inspectAnchors().inspectH1().inspectStrong(5).inspectTitle().inspectMeta()
+    checker.inspectImages()
+            .inspectAnchors()
+            .inspectH1()
+            .inspectStrong(5)
+            .inspectTitle()
+            .inspectMeta()
+            ._hasMissingAttribute('meta', 'content')
+            ._exists('.foo')
+            ._exceeds('div', 1)
     var output = {
       img: '<img> without alt attribute or has empty alt attribute: 3',
       a: '<a> without rel attribute or has empty rel attribute: 2',
       h1: 'There should not be more than 1 <h1> tag(s). Count: 2',
       strong: 'There should not be more than 5 <strong> tag(s). Count: 16',
       'head title': '<title> not found',
-      meta: [ '<meta name="keywords"... > not found in <head>' ]
+      meta: '<meta> without content attribute or has empty content attribute: 2',
+      '.foo': '<.foo> not found'
     }
     for (var key in output) {
       if (Array.isArray(checker.errors[key])) {
-        checker.errors[key].forEach(function(msg, idx) {
+        checker.errors[key].forEach(function (msg, idx) {
           msg.should.equal(output[key][idx])
         })
       } else {
