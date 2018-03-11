@@ -6,7 +6,7 @@
 
 ```
 const Checker = require('Checker')
-var checker = new Checker(htmlFilePath)
+var checker = new Checker('./path/to/file.html')
 
 checker.inspectTitle().inspectH1().report()
 //  head title

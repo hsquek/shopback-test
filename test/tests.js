@@ -4,6 +4,15 @@ var _ = require('lodash')
 var Checker = require('../Checker.js')
 
 describe('._exceeds', function () {
+  it('Should accept a valid HTML filepath', function (done) {
+    (function () {
+      new Checker('./README.md')
+    }).should.throw(Error)
+    done()
+  })
+})
+
+describe('._exceeds', function () {
   it('Should show an error if maximum count is exceeded', function (done) {
     var checker = new Checker('./test/scenarios/fail-exceed.html')
     checker._exceeds('.para-test', 2)

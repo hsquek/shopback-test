@@ -3,6 +3,9 @@ const cheerio = require('cheerio')
 const _ = require('lodash')
 
 function Checker (pathToHTML) {
+  if (pathToHTML.split('.').pop() !== 'html') {
+    throw new Error('Please provide a valid HTML filepath')
+  }
   var html = fs.readFileSync(pathToHTML, 'utf8')
   this.content = cheerio.load(html)
   this.errors = {}
