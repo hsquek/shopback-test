@@ -21,7 +21,7 @@ __The following methods adhere to certain pre-defined SEO rules:__
 Logs an error if there is no `<title>` tag in the `<head>`.
 
 ##### .inspectMeta([[names]])
-Logs an error if `<meta>` tags do not have `name` attributes declared or if `name` attributes are left empty.
+Logs an error if the requisite names for `<meta>` tags are not found.
 
 ```
 // name defaults: ['keywords', 'description']
@@ -77,7 +77,7 @@ Logs an error if selector is not found.
 ```
 ...
 checker._exists('div')
-{ 'div': '<div> not found' }
+// { 'div': '<div> not found' }
 ```
 
 

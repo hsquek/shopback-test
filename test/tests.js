@@ -40,7 +40,7 @@ describe('.inspectTitle', function () {
 })
 
 describe('.inspectMeta', function () {
-  it('Should show an error if meta tags are not properly filled in', function (done) {
+  it('Should show an error if names on meta tags are not properly filled in', function (done) {
     var checker = new Checker('./test/scenarios/fail-meta.html')
     checker.inspectMeta()
     checker.errors['meta'].should.be.an.instanceof(Array)
