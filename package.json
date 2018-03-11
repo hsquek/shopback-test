@@ -1,6 +1,6 @@
 {
   "name": "shopback-test-hsquek",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shopback's technical test",
   "main": "Checker.js",
   "scripts": {

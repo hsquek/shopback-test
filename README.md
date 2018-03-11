@@ -1,8 +1,11 @@
 # SEO Checker
 
-#### Find out if you're flouting any SEO rules
+#### Find out if you're flouting any SEO rules.
 
 ### Initialisation and Usage
+Pass in the path to your HTML file to initialise the checker.
+
+*Remember to `.report()` after all your checks!*
 
 ```
 const Checker = require('Checker')

@@ -33,8 +33,8 @@ describe('._exists', function () {
 describe('._hasMissingAttribute', function () {
   it('Should show an error if selector does not have a specific attribute declared or has empty attribute', function (done) {
     var checker = new Checker('./test/scenarios/fail-missingAttribute.html')
-    checker._hasMissingAttribute('div', 'class')
-    checker.errors['div'].should.equal('<div> without class attribute or has empty class attribute: 1')
+    checker._hasMissingAttribute('meta', 'content')
+    checker.errors['meta'].should.equal('<meta> without content attribute or has empty content attribute: 1')
     done()
   })
 })
