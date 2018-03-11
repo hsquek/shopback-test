@@ -97,5 +97,9 @@ checker._hasMissingAttribute('div', 'class')
 // { div: '<div> without class attribute or has empty class attribute: 1' }
 ```
 
+### Tests
+`npm test`
+
+
 ### Acknowledgements
 [cheerio](https://github.com/cheeriojs/cheerio)
