@@ -11,7 +11,10 @@ Pass in the path to your HTML file to initialise the checker.
 const Checker = require('Checker')
 var checker = new Checker('./path/to/file.html')
 
-checker.inspectTitle().inspectH1()._hasMissingAttribute('meta', 'content').report()
+checker.inspectTitle()
+        .inspectH1()
+        ._hasMissingAttribute('meta', 'content')
+        .report()
 //  head title
 //    -> <title> not found
 //  h1
