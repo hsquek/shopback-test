@@ -124,7 +124,7 @@ describe('method chaining', function () {
 
     var output = {
       img:
-        [ '<img> without alt attribute or has empty alt attribute: 3',
+      [ '<img> without alt attribute or has empty alt attribute: 3',
         'There should not be more than 1 <img> tag(s). Count: 6' ],
       a:
         [ '<a> without rel attribute or has empty rel attribute: 2' ],
@@ -140,13 +140,9 @@ describe('method chaining', function () {
     }
 
     for (var key in output) {
-      if (Array.isArray(checker.errors[key])) {
-        checker.errors[key].forEach(function (msg, idx) {
-          msg.should.equal(output[key][idx])
-        })
-      } else {
-        checker.errors[key].should.equal(output[key])
-      }
+      checker.errors[key].forEach(function (msg, idx) {
+        msg.should.equal(output[key][idx])
+      })
     }
     done()
   })
@@ -159,7 +155,7 @@ describe('method chaining', function () {
             .inspectStrong(5)
             .inspectTitle()
             .inspectMeta()
-            _.isEmpty(checker.errors)
+    _.isEmpty(checker.errors)
             .should.equal(true)
     done()
   })

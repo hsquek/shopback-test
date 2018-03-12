@@ -1,6 +1,6 @@
-const fs = require('fs')
-const cheerio = require('cheerio')
-const _ = require('lodash')
+var fs = require('fs')
+var cheerio = require('cheerio')
+var _ = require('lodash')
 
 function Checker (pathToHTML) {
   if (pathToHTML.split('.').pop() !== 'html') {
@@ -34,10 +34,11 @@ Checker.prototype.inspectMeta = function (extraNames = []) {
   })
 
   requiredNames.forEach(function (name) {
+    var msg = '<meta name="' + name + '"... > not found in <head>'
     if (!existingNames[name]) {
       errors = Object.assign(errors, {
-        meta: errors.meta ? errors.meta.concat(['<meta name="' + name + '"... > not found in <head>'])
-                            : [].concat(['<meta name="' + name + '"... > not found in <head>'])
+        meta: errors.meta ? errors.meta.concat(msg)
+                            : [].concat(msg)
       })
     }
   })
@@ -83,12 +84,9 @@ Checker.prototype._hasMissingAttribute = function (selector, attribute) {
   })
 
   if (count >= 1) {
-    // errors = Object.assign(errors, {
-    //   [selector]: '<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count
-    // })
+    var msg = '<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count
     errors = Object.assign(errors, {
-      [selector]: errors[selector] ? errors[selector].concat('<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count)
-                                    : [].concat('<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count)
+      [selector]: errors[selector] ? errors[selector].concat(msg) : [].concat(msg)
     })
   }
 
@@ -102,11 +100,11 @@ Checker.prototype._exists = function (selector) {
   var errors = this.errors
 
   if (!elements.length) {
+    var msg = '<' + tag + '>' + ' not found'
     errors = Object.assign(errors, {
-      [selector]: errors[selector] ? errors[selector].concat('<' + tag + '>' + ' not found')
-                                    : [].concat('<' + tag + '>' + ' not found')
+      [selector]: errors[selector] ? errors[selector].concat(msg)
+                                    : [].concat(msg)
     })
-
   }
 
   return this
@@ -119,12 +117,9 @@ Checker.prototype._exceeds = function (selector, maxCount) {
   var errors = this.errors
 
   if (elements.length > maxCount) {
-    // errors = Object.assign(errors, {
-    //   [selector]: 'There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length
-    // })
+    var msg = 'There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length
     errors = Object.assign(errors, {
-      [selector]: errors[selector] ? errors[selector].concat('There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length)
-                                    : [].concat('There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length)
+      [selector]: errors[selector] ? errors[selector].concat(msg) : [].concat(msg)
     })
   }
 
@@ -136,13 +131,9 @@ Checker.prototype.report = function () {
 
   for (var key in errors) {
     console.log('\x1b[34m', key)
-    if (Array.isArray(errors[key])) {
-      errors[key].forEach(function (statement) {
-        console.log('\x1b[31m', '  -> ' + statement)
-      })
-    } else {
-      console.log('\x1b[31m', '  -> ' + errors[key])
-    }
+    errors[key].forEach(function (statement) {
+      console.log('\x1b[31m', '  -> ' + statement)
+    })
   }
 
   if (_.isEmpty(errors)) {
