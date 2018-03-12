@@ -83,8 +83,12 @@ Checker.prototype._hasMissingAttribute = function (selector, attribute) {
   })
 
   if (count >= 1) {
+    // errors = Object.assign(errors, {
+    //   [selector]: '<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count
+    // })
     errors = Object.assign(errors, {
-      [selector]: '<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count
+      [selector]: errors[selector] ? errors[selector].concat('<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count)
+                                    : [].concat('<' + tag + '> without ' + attribute + ' attribute or has empty ' + attribute + ' attribute: ' + count)
     })
   }
 
@@ -99,8 +103,10 @@ Checker.prototype._exists = function (selector) {
 
   if (!elements.length) {
     errors = Object.assign(errors, {
-      [selector]: '<' + tag + '>' + ' not found'
+      [selector]: errors[selector] ? errors[selector].concat('<' + tag + '>' + ' not found')
+                                    : [].concat('<' + tag + '>' + ' not found')
     })
+
   }
 
   return this
@@ -113,8 +119,12 @@ Checker.prototype._exceeds = function (selector, maxCount) {
   var errors = this.errors
 
   if (elements.length > maxCount) {
+    // errors = Object.assign(errors, {
+    //   [selector]: 'There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length
+    // })
     errors = Object.assign(errors, {
-      [selector]: 'There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length
+      [selector]: errors[selector] ? errors[selector].concat('There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length)
+                                    : [].concat('There should not be more than ' + maxCount + ' <' + tag + '> tag(s). Count: ' + elements.length)
     })
   }
 
